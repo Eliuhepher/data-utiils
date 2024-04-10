@@ -33,8 +33,13 @@ class MSSQL():
 
     
 
+## Colocal los datos de conexion en las siguientes variables 
 
-mssql = MSSQL("capnet.ddns.net", "sa", ".5capnet", "redmine")
+SERVER = "capnet.ddns.net"
+USER = "XXXYYYZZ"
+PASSWORD = "AAAABBBBCCCC"
+DATABASE = "redmine"
+mssql = MSSQL(f"{SERVER}", "{USER}", "{PASSWORD}", "{DATABASE}")
 cnxn = mssql.get_connect()
 cursor = cnxn.cursor()
 
