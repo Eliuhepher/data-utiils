@@ -1,2 +1,6 @@
 pyodbc
 pandas
+pyspark
+jupyter
+matplotlib
+scikit-learn
