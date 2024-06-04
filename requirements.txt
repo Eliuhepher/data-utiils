@@ -4,3 +4,4 @@ pyspark
 jupyter
 matplotlib
 scikit-learn
+pyarrow
