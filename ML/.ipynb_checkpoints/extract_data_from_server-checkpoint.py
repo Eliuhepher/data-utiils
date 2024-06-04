@@ -1,10 +1,8 @@
-from typing import Any
 import pandas as pd
 from pyodbc import Connection, connect, Cursor
-from collections import Counter
+
 from datetime import datetime
-import json
-import operator
+
 start_time = datetime.now()
 
 class MSSQL():
@@ -28,7 +26,7 @@ class MSSQL():
         except Exception as error:
             return (error)
         
-    def build_dataset(query: str, cursor: Cursor) -> pd.DataFrame:
+    def build_dataset(self, query: str, cursor: Cursor) -> pd.DataFrame:
         df = pd.read_sql()
 
     
@@ -38,24 +36,14 @@ class MSSQL():
 SERVER = "capnet.ddns.net"
 USER = "sa"
 PASSWORD = ".5capnet"
-DATABASE = "redmine"
-mssql = MSSQL(f"{SERVER}", "{USER}", "{PASSWORD}", "{DATABASE}")
+DATABASE = "capnet-apps-bi-soni"
+TABLE = "FV_DC_ANL_FV_DC_OPERACIONES_SERVICIO_KM"
+mssql = MSSQL(f"{SERVER}", f"{USER}", f"{PASSWORD}", f"{DATABASE}")
 cnxn = mssql.get_connect()
-cursor = cnxn.cursor()
+print(cnxn)
 
-query = "SELECT [id], [description] FROM dbo.issues order by id desc;"
-df = pd.read_sql(query, cnxn)
-sentences = []
-[sentences.append(df_element) for df_element in df["description"]]
 
-words = []
-for sentence in sentences:
-    splited = sentence.split(" ")
-    words.extend(splited)
+QUERY = "SELECT * FROM v_creta_nextgen_model"
+df = pd.read_sql(QUERY, cnxn)
 
-words_data = dict(sorted(Counter(words).items(), key=operator.itemgetter(1), reverse=True))
-with open('different_words.json', 'w', encoding='utf-8') as f:
-    json.dump(words_data, f, ensure_ascii=False, indent=4)
-
-end_time = datetime.now()
-print('Duration: {}'.format(end_time - start_time))
+save_file_to_csv = df.to_csv("data_hyundai_creta.csv")
