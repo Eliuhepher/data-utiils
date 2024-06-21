@@ -1,6 +1,6 @@
+from pathlib import Path  
 import pandas as pd
 from pyodbc import Connection, connect, Cursor
-
 from datetime import datetime
 
 start_time = datetime.now()
@@ -37,13 +37,13 @@ SERVER = "capnet.ddns.net"
 USER = "sa"
 PASSWORD = ".5capnet"
 DATABASE = "capnet-apps-bi-soni"
-TABLE = "FV_DC_ANL_FV_DC_OPERACIONES_SERVICIO_KM"
+TABLE = "v_nextgen_model_kmeans"
 mssql = MSSQL(f"{SERVER}", f"{USER}", f"{PASSWORD}", f"{DATABASE}")
 cnxn = mssql.get_connect()
 print(cnxn)
 
 
-QUERY = "SELECT * FROM v_creta_nextgen_model"
+QUERY = f"SELECT * FROM {TABLE}"
 df = pd.read_sql(QUERY, cnxn)
-
-save_file_to_csv = df.to_csv("data_hyundai_creta.csv")
+filepath = Path.cwd().parent / "notebooks/data/data_kmeans.csv"
+save_file_to_csv = df.to_csv(filepath)
