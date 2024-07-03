@@ -37,7 +37,7 @@ SERVER = "capnet.ddns.net"
 USER = "sa"
 PASSWORD = ".5capnet"
 DATABASE = "capnet-apps-bi-soni"
-TABLE = "v_nextgen_model_kmeans"
+TABLE = "fv_nextgen_model_kmeans"
 mssql = MSSQL(f"{SERVER}", f"{USER}", f"{PASSWORD}", f"{DATABASE}")
 cnxn = mssql.get_connect()
 print(cnxn)
