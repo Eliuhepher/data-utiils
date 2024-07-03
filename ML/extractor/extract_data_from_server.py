@@ -45,5 +45,6 @@ print(cnxn)
 
 QUERY = f"SELECT * FROM {TABLE}"
 df = pd.read_sql(QUERY, cnxn)
+print(df)
 filepath = Path.cwd().parent / "notebooks/data/data_kmeans.csv"
 save_file_to_csv = df.to_csv(filepath)
